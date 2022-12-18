@@ -13,6 +13,9 @@ import Escrow from './abis/Escrow.json'
 // Config
 import config from './config.json';
 
+// Metadata
+import metadata from './assets/metadata'
+
 function App() {
 
   const [account, setAccount] = useState(null);
@@ -72,6 +75,25 @@ function App() {
         <h3>Millow Listings</h3>
         <hr />
 
+        <div className="cards" >
+        {
+          metadata.map((home) => (
+              <div className="card" key={home.id} onClick={() => toggleProp(home)} >
+              <div className="card__image">
+                <img src={home.image} alt="Home" className="object-contain " />
+              </div>
+              <div className="card__info">
+                <h4>{home.attributes[0].value} ETH</h4>
+                <p>
+                  <strong>{home.attributes[2].value} </strong> beds |
+                  <strong>{home.attributes[3].value}</strong> baths |
+                  <strong>{home.attributes[4].value}</strong> sqft
+                </p>
+                <p>{home.address}</p>
+              </div>
+            </div>
+          ))}
+          </div>
         <div className="cards">
           {homes.map((home, index) => (
             <div className="card" key={index} onClick={() => toggleProp(home)} >
